@@ -1,5 +1,5 @@
-public class Array {
-    private int[] data;
+public class Array<E> {
+    private E[] data;
     private int size;
 
     /**
@@ -7,7 +7,7 @@ public class Array {
      * @param capacity
      */
     public Array(int capacity){
-        data = new int[capacity];
+        data = (E[]) new Object[capacity];
         size = 0;
     }
 
@@ -19,11 +19,18 @@ public class Array {
     }
 
     /**
+     * 获取数组实际长度
+     * @return
+     */
+    int getSize(){
+        return size;
+    }
+    /**
      * 获取数组的容量
      * @return
      */
     public int getCapacity(){
-        return size;
+        return data.length;
     }
 
     /**
@@ -31,7 +38,7 @@ public class Array {
      * @param index
      * @param e
      */
-    public void append(int index, int e){
+    public void append(int index, E e){
         if(index < 0 || index >= data.length){
             throw new IllegalArgumentException("Array append failed, index should be index < 0 || index >= data.length");
         }
@@ -49,7 +56,7 @@ public class Array {
      * 向数组头部插入元素
      * @param e
      */
-    public void appendFirst(int e){
+    public void appendFirst(E e){
         append(0, e);
     }
 
@@ -57,7 +64,7 @@ public class Array {
      * 向数组尾部插入元素
      * @param e
      */
-    public void appendLast(int e){
+    public void appendLast(E e){
         append(size, e);
     }
 
@@ -66,7 +73,7 @@ public class Array {
      * @param index
      * @return
      */
-    int get(int index){
+    E get(int index){
         if(index < 0 || index >= size){
             throw new IllegalArgumentException("Array append failed, index should be index < 0 || index >= size");
         }
@@ -78,7 +85,7 @@ public class Array {
      * @param index
      * @param e
      */
-    void set(int index, int e){
+    void set(int index, E e){
         if(index < 0 || index >= size){
             throw new IllegalArgumentException("Array append failed, index should be index < 0 || index >= size");
         }
@@ -90,9 +97,9 @@ public class Array {
      * @param e
      * @return
      */
-    int find(int e){
+    int find(E e){
         for(int i = 0; i < size; i ++){
-            if(e == data[i]){
+            if(e.equals(data[i])){
                 return i;
             }
         }
@@ -104,7 +111,7 @@ public class Array {
      * @param e
      * @return
      */
-    boolean contain(int e){
+    boolean contain(E e){
         int index = find(e);
         return index >= 0;
     }
@@ -114,11 +121,11 @@ public class Array {
      * @param index
      * @return
      */
-    int remove(int index){
+    E remove(int index){
         if(index < 0 || index >= size){
             throw new IllegalArgumentException("Array remove fail, cannot find e");
         }
-        int element = data[index];
+        E element = data[index];
         for(int i = index; i < size - 1; i ++){
             data[i] = data[i+1];
         }
@@ -130,7 +137,7 @@ public class Array {
      * 删除第一个元素
      * @return
      */
-    int removeFirst(){
+    E removeFirst(){
         return remove(0);
     }
 
@@ -138,7 +145,7 @@ public class Array {
      * 删除最后一个元素
      * @return
      */
-    int removeLast(){
+    E removeLast(){
         return  remove(size - 1);
     }
 
@@ -147,7 +154,7 @@ public class Array {
      * @param e
      * @return
      */
-    int removeElement(int e){
+    E removeElement(E e){
         int index = find(e);
         return remove(index);
     }

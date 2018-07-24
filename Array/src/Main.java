@@ -17,5 +17,13 @@ public class Main {
 
         arr.remove(8);
         System.out.println(arr.toString());
+
+        Person p1 = new Person(19, "jack");
+        Person p2 = new Person(18, "tom");
+
+        Array<Person> personArr = new Array(10);
+        personArr.appendLast(p1);
+        personArr.appendLast(p2);
+        System.out.println(personArr.toString());
     }
 }
