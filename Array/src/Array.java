@@ -39,11 +39,11 @@ public class Array<E> {
      * @param e
      */
     public void append(int index, E e){
-        if(index < 0 || index >= data.length){
+        if(index < 0){
             throw new IllegalArgumentException("Array append failed, index should be index < 0 || index >= data.length");
         }
         if(size == data.length){
-            throw new IllegalArgumentException("Array append failed, Array has been out of bound!");
+            resize(data.length * 2);
         }
         for(int i = size - 1; i > index; i --){
             data[i+1] = data[i];
@@ -51,6 +51,19 @@ public class Array<E> {
         data[index] = e;
         size ++;
     }
+
+    /**
+     * 改编数组容量
+     * @param capcity
+     */
+    private void resize(int capcity){
+        E[] newArr = (E[]) new Object[capcity];
+        for(int i = 0; i < size; i ++){
+            newArr[i] = data[i];
+        }
+        data = newArr;
+    }
+
 
     /**
      * 向数组头部插入元素
@@ -130,6 +143,9 @@ public class Array<E> {
             data[i] = data[i+1];
         }
         size --;
+        if(size <= data.length / 2){
+            resize(data.length / 2);
+        }
         return element;
     }
 
@@ -163,6 +179,8 @@ public class Array<E> {
     public String toString() {
         StringBuilder str = new StringBuilder();
         str.append("data:");
+        String sizeStr = String.format("size is %d, capcity is %d", size, data.length);
+        str.append(sizeStr);
         str.append("[");
         for(int i = 0; i < size; i ++){
             str.append(data[i]);
