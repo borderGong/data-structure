@@ -145,6 +145,34 @@ public class LinkedList<E> {
         return false;
     }
 
+    /**
+     * 删除元素
+     * @param index
+     * @return
+     */
+    public E remove(int index){
+        if(index < 0 || index >= size)
+            throw new IllegalArgumentException("index out of bound!");
+
+        Node prev = dummyHead;
+        for(int i = 0; i < index; i ++)
+            prev = prev.next;
+        Node ret = prev.next;
+        prev.next = ret.next;
+
+        ret.next = null;
+        size --;
+        return ret.e;
+    }
+
+    public E removeFirst(){
+        return remove(0);
+    }
+
+    public E removeLast(){
+        return remove(size - 1);
+    }
+
     @Override
     public String toString(){
         StringBuilder str = new StringBuilder();

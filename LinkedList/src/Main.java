@@ -11,5 +11,15 @@ public class Main {
 
         linkedList.add(6, 80);
         System.out.println(linkedList.toString());
+
+        linkedList.remove(6);
+        System.out.println(linkedList.toString());
+
+        linkedList.removeFirst();
+        System.out.println(linkedList.toString());
+
+        linkedList.removeLast();
+        System.out.println(linkedList.toString());
+
     }
 }
