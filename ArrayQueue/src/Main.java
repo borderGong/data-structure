@@ -24,6 +24,9 @@ public class Main {
         double time2 = testQueue(queue2, optCount);
         System.out.println(time2);
 
+        LinkedListQueue<Integer> queue3 = new LinkedListQueue<>();
+        double time3 = testQueue(queue3, optCount);
+        System.out.println(time3);
 
     }
 }
